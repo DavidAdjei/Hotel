@@ -1,0 +1,40 @@
+.nav_bar {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 5rem;
+}
+
+.nav_items {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcome_message {
+  margin-right: 20px;
+}
+
+.nav_link {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #777;
+}
