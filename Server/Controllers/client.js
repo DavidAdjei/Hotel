@@ -292,8 +292,16 @@ exports.allClients = async (req, res) => {
 
 exports.updateDaysRemaining = async (req, res) => {
     try {
-        const hotel = await Hotel.findOne();
-        const clients = hotel.clients.filter(client => client.isCheckedIn === true);
+        const existingHotel = await Hotel.findOne();
+        let hotel;
+
+        if (!existingHotel) {
+            // Create a new hotel document if none exists
+            hotel = new Hotel();
+        } else {
+            hotel = existingHotel;
+        }
+        const clients = hotel.clients?.filter(client => client.isCheckedIn === true);
 
         if (clients.length === 0) {
             return res.status(200).json({error: 'No Checked In Clients'});
@@ -328,8 +336,16 @@ exports.updateHoursRemaining = async (req, res) => {
         const { department } = req.params;
 
         if (department === "hotel") {
-            const hotel = await Hotel.findOne();
-            const clients = hotel.clients.filter(client => client.isCheckedIn === true);
+            const existingHotel = await Hotel.findOne();
+            let hotel;
+
+            if (!existingHotel) {
+                // Create a new hotel document if none exists
+                hotel = new Hotel();
+            } else {
+                hotel = existingHotel;
+            }
+            const clients = hotel.clients?.filter(client => client.isCheckedIn === true);
 
             if (clients.length === 0) {
                 return res.status(200).json({error: 'No Checked In Clients'});
@@ -352,7 +368,13 @@ exports.updateHoursRemaining = async (req, res) => {
             await hotel.save();
             return res.json({ message: "Hours remaining updated successfully" });
         } else if (department === 'swimmingPool') {
-            const pool = await SwimmingPool.findOne();
+            const existingPool = await SwimmingPool.findOne();
+            let pool;
+            if (!existingPool) {
+                pool = new SwimmingPool();
+            } else {
+                pool = existingPool;
+            }
             const clients = pool.clients.filter(client => client.isSwimming === true);
 
             if (clients.length === 0) {

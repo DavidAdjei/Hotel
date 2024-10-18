@@ -160,7 +160,7 @@ exports.viewOrders = async (req, res) => {
     try {
         const restaurant = await Restaurant.findOne();
         if (!restaurant) {
-            return res.status(404).json({ error: 'Restaurant not found' });
+            return res.status(200).json({ orders: {} });
         } else {
             const orders = restaurant.orders;
             res.json({ orders });
